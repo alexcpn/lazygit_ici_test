@@ -17,7 +17,9 @@ tasks:
 
   - id: test
     commands:
-      - go test -short ./...
+      - git config --global user.email "ci@example.com"
+      - git config --global user.name "CI Bot"
+      - go test $(go list ./... | grep -v 'pkg/integration/clients')
     depends_on: [clone]
 
 integrations:
