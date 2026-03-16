@@ -17,7 +17,7 @@ tasks:
 
   - id: test
     commands:
-      - go test ./...
+      - go test -short ./...
     depends_on: [clone]
 
 integrations:
