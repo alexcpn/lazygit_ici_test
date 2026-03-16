@@ -1,0 +1,31 @@
+name: my-app
+
+defaults:
+  image: golang:1.24
+
+tasks:
+  - id: clone
+    image: alpine/git:latest
+    commands:
+      - git clone --depth=1 $REPO_URL /workspace
+      - cd /workspace && git checkout $COMMIT_SHA
+
+  - id: build
+    commands:
+      - go build ./...
+    depends_on: [clone]
+
+  - id: test
+    commands:
+      - go test ./...
+    depends_on: [clone]
+
+integrations:
+  linters:
+    enabled: true
+    tools:
+      - name: golangci-lint
+
+triggers:
+  pull_requests: true
+  branches: [main]
