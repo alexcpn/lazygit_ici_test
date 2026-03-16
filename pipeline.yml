@@ -1,7 +1,7 @@
 name: my-app
 
 defaults:
-  image: golang:1.24
+  image: golang:1.25
 
 tasks:
   - id: clone
@@ -25,6 +25,7 @@ integrations:
     enabled: true
     tools:
       - name: golangci-lint
+        image: golangci/golangci-lint:latest
 
 triggers:
   pull_requests: true
